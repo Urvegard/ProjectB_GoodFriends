@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@* @page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row"> *@
+            @* Loopar igenom Friends från backend
+            @foreach (var friend in Model.Friends)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="~/UiTemplate-main/img/@friend.Image" class="bd-placeholder-img card-img-top" alt="@friend.Name" />
+                        <div class="card-body">
+                            <p class="card-text">@friend.Name</p>
+                            <p class="card-text">@friend.City</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div> *@

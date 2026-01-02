@@ -1,0 +1,18 @@
+@page
+@model AppRazor.Pages.SeedModel
+
+<h1>All Friends</h1>
+
+@if (Model.Friends.Any())
+{
+    <ul>
+    @foreach (var f in Model.Friends)
+    {
+        <li>@f.FirstName @f.LastName (@f.Email)</li>
+    }
+    </ul>
+}
+else
+{
+    <p>No friends found.</p>
+}

@@ -1,0 +1,696 @@
+<!doctype html>
+  <html lang="en" data-bs-theme="auto">
+    <!-- Part of page Frame -->
+    <!-- html-head with all resources -->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Martin Lenart, Seido AB">
+    
+        <title>Seido Full template</title>
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="./favicon_io/site.webmanifest">
+        
+        <!-- Bootstrap styles from their respective templates -->
+        <link href="./css/bootstrap/bootstrap.css" rel="stylesheet">
+        <link href="./css/bootstrap/navbars-offcanvas.css" rel="stylesheet">
+        <link href="./css/bootstrap/features.css" rel="stylesheet">
+        <link href="./css/bootstrap/grid.css" rel="stylesheet">
+        <link href="./css/bootstrap/sign-in.css" rel="stylesheet">
+        <link href="./css/bootstrap/modals.css" rel="stylesheet">
+    </head>
+
+    <!-- Part of page Frame -->
+    <!-- Header and Menu -->
+    <body>
+      <!-- SVG icons for buttons etc-->
+      <svg xmlns="http://www.w3.org/2000/svg">
+        <symbol id="home" viewBox="0 0 16 16">
+          <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+        </symbol>
+        <symbol id="edit" viewBox="0 0 16 16">
+          <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+          <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>  
+        </symbol>
+        <symbol id="undo" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+          <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+      </symbol>
+        <symbol id="save" viewBox="0 0 16 16">
+          <path d="M11 2H9v3h2z"/>
+          <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
+      </symbol>
+      <symbol id="boombox" viewBox="0 0 16 16">
+        <path d="M14 0a.5.5 0 0 1 .5.5V2h.5a1 1 0 0 1 1 1v2H0V3a1 1 0 0 1 1-1h12.5V.5A.5.5 0 0 1 14 0M2 3.5a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0m2 0a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0m7.5.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m1.5-.5a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0M9.5 3h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1M6 10.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-1.5.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m7 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m.5-1.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
+        <path d="M0 6h16v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm2 4.5a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0m7 0a2.5 2.5 0 1 0 5 0 2.5 2.5 0 0 0-5 0"/>      
+      </symbol>
+      <symbol id="album" viewBox="0 0 16 16">
+        <path d="M8 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4m0 3a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0"/>      
+      </symbol>
+      <symbol id="artist" viewBox="0 0 16 16">
+        <path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2"/>
+        <path fill-rule="evenodd" d="M12 3v10h-1V3z"/>
+        <path d="M11 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 16 2.22V4l-5 1z"/>
+        <path fill-rule="evenodd" d="M0 11.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 7H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5m0-4A.5.5 0 0 1 .5 3H8a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5"/>      
+      </symbol>
+      </svg>
+
+      <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="#home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <span class="fs-4">Seido full template</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#list-of-items" class="nav-link">List of items</a></li>
+                <li class="nav-item"><a href="#view-item" class="nav-link">View item</a></li>
+                <li class="nav-item"><a href="#edit-item" class="nav-link">Edit item</a></li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    Others
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li class="nav-item"><a href="#seed" class="nav-link">Seed</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li class="nav-item"><a href="#modals" class="nav-link">Modals</a></li>                    
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li class="nav-item"><a href="#register" class="nav-link">Register</a></li>
+                    <li class="nav-item"><a href="#sign-in" class="nav-link">Sign in</a></li>                    
+                  </ul>
+                </li>
+            </ul>
+        </header>
+      </div>
+
+      <main>
+
+        <!-- Individual pages, I place them with <main> tag. Will become separate Razor Pages -->
+        <!-- Page Welcome -->
+        <div class="container px-4 py-4" id="home">
+          <div class="bg-body-tertiary p-5 rounded">
+            <div class="col-sm-8 py-5 mx-auto">
+              <h1 class="display-5 fw-normal">Welcome to various templates</h1>
+                <p class="fs-5">This is a set of page templates using bootstrap giving example of
+                  of a modern adaptable UI for some common page needs. Simply use and modify the page 
+                  container you need.
+                </p>
+              
+                <p>I also use favicon. Enjoy!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page web-api-info -->
+        <div class="container px-4 py-4" id="webapi-info">
+          <h2 class="pb-2 border-bottom">WebApi info</h2>
+          <p>Below you see an overview of the content presented by the WebApi. Click on the link to see details. </p>
+
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4 py-5">
+            <div class="col d-flex align-items-start">
+              <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#boombox"/></svg>
+              <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Music groups</h3>
+                <p>253 music groups</p>
+                <a href="#list-of-items" class="btn btn-primary">
+                  See details
+                </a>    
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#album"/></svg>
+              <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Albums</h3>
+                <p>1050 albums</p>
+                <a href="#list-of-items" class="btn btn-primary">
+                  See details
+                </a>    
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#artist"/></svg>
+              <div>
+                <h3 class="fw-bold mb-0 fs-4 text-body-emphasis">Artists</h3>
+                <p>135 Artists</p>
+                <a href="#list-of-items" class="btn btn-primary">
+                  See details
+                </a>    
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page List of groups -->
+        <div class="container px-4 py-4" id="list-of-items">
+          <h2 class="pb-2 border-bottom">List of Music bands</h2>
+      
+          <p>Below are some of the worlds most famous Music bands.</p>
+          <p>The database contains 2 music groups the search criteria</p>
+      
+          <form method="post" class="needs-validation" method="post" novalidate>
+              <label class="form-check-label" for="useSeeds"></label>
+              <input class="form-check-input" type="checkbox" id="useSeeds">
+              Use seeded data
+              <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+                  <div class="col-md-7 col-lg-10">
+                      <div class="row mb-2 text-center">
+                          <!-- Search filter-->
+                          <div class="row mb-1 text-center">
+                              <div class="col-md-6 ">
+                                  <input class="form-control" type="search" placeholder="Search">
+                              </div>
+                              <div class="col-md-2 ">
+                                  <button class="btn btn-outline-success" type="submit">Search</button>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row mb-2 text-center">
+                          <!-- This is where selected item id will be stored -->
+                          <input type="hidden" name="groupId" data-seido-selected-item-id-target />
+      
+                          <div class="col-md-10 themed-grid-head-col">Group Name</div>
+                          <div class="col-md-2 themed-grid-head-col">
+                              <a href="#add-edit-artist"  class="btn btn-success btn-sm m-1" type="button">New</a>
+                          </div>
+                      </div>
+      
+                      <div class="row mb-2 text-center">
+      
+                        <div class="col-md-10 themed-grid-col">
+                          <a href="#view-item">
+                            AC/DC
+                          </a>
+                        </div>
+
+                        <div class="col-md-2 themed-grid-col">
+                            <a href="#edit-item" class="btn btn-secondary btn-sm m-1" type="button">Edit</a>
+
+                            <!-- Button to trigger modal confirmation with modal in the form tag -->
+                            <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#delModal"
+                                    data-seido-modal-body="AC/DC is about to be deleted."
+                                    data-seido-selected-item-id="123">
+                                Del
+                            </button>
+                        </div>
+
+                        <nav aria-label="Standard pagination example">
+                          <ul class="pagination">
+                            <li class="page-item">
+                              <a class="page-link" href="#list-of-items" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                              </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#list-of-items">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#list-of-items">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#list-of-items">3</a></li>
+                            <li class="page-item">
+                              <a class="page-link" href="#list-of-items" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+    
+                        <!-- Modal in the form tag -->
+                        <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="softModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-danger" id="softModalLabel">Confirm deletion</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Hello from modal
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary btn-danger">Ok</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </form>
+      </div>
+      
+      <!-- Page view-group -->
+        <div class="container px-4 py-4" id="view-item">
+          <h2 class="pb-2 border-bottom">View details of a music group
+            <a href="#edit-item"  >
+              <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#edit"/></svg>
+            </a>
+          </h2>
+          <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+            <div class="col-md-7 col-lg-10">
+                <form class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="groupName" class="form-label">GroupName</label>
+                            <input type="text" class="form-control" id="groupName" value="AC/DC" readonly>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="genre" class="form-label">Genre</label>
+                            <input type="text" class="form-control" id="genre" value="Rock" readonly>
+                        </div>
+
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="established" class="form-label">Established Year</label>
+                            <input type="text" class="form-control" id="established" value="1973" readonly>
+                        </div>
+                    </div>
+                    <div class="row g-1">
+                      <h3 class="pb-2">Artists</h3>
+        
+                      <div class="row mb-2 text-center">
+                        <div class="col-md-12 themed-grid-head-col">Name</div>
+                      </div>
+                      <div class="row mb-2 text-center">
+                        <div class="col-md-12 themed-grid-col">Angus Young</div>
+                      </div>
+                    </div> 
+                    <div class="row g-1">
+                      <h3 class="pb-2">Albums</h3>
+        
+                      <div class="row mb-2 text-center">
+                          <div class="col-md-10 themed-grid-head-col">Name</div>
+                          <div class="col-md-2 themed-grid-head-col">Year</div>
+                      </div>
+
+                      <div class="row mb-2 text-center">
+                          <div class="col-md-10 themed-grid-col">High Voltage</div>
+                          <div class="col-md-2 themed-grid-col">1975</div>
+                      </div>
+                    </div>                      
+                </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page edit-group -->
+        <div class="container px-4 py-4" id="edit-item">
+          <form class="needs-validation" id="formValidate">
+            <h2 class="pb-2 border-bottom">Edit details of a music group
+              <button class="btn btn-primary-outline" type="submit" id="btnValidate">
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#save"/></svg>
+              </button>
+              <button class="btn btn-primary-outline" type="submit">
+                <svg class="bi text-body-secondary flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#undo"/></svg>
+              </button>
+            </h2>
+
+            <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+                <div class="col-md-7 col-lg-10">
+
+                  <div class="row g-3">
+                      <div class="col-sm-6">
+                          <label for="groupName" class="form-label">GroupName</label>
+                          <input type="text" class="form-control" id="groupName" value="AC/DC" required>
+                          <div class="invalid-feedback">You must provide a groupname.</div>
+                      </div>
+
+                      <div class="col-sm-6">
+                          <label for="genre" class="form-label">Genre</label>
+                          <select class="form-control" id="genre">
+                            <option>Rock</option>
+                            <option selected>Jazz</option>
+                            <option>Blues</option>
+                          </select>
+                      </div>
+
+                      <div class="col-sm-6">
+                      </div>
+                      <div class="col-sm-6">
+                          <label for="established" class="form-label">Established Year</label>
+                          <input type="text" class="form-control" id="established" value="1973" required>
+                          <div class="invalid-feedback">You must provide a year.</div>
+                      </div>
+                  </div>
+                  <div class="row g-1">
+                      <h3 class="pb-2">Artists</h3>
+                      
+                      <!-- This is the parameter that will be sent to Post when item is selected -->
+                      <input type="hidden" name="artistId" data-seido-selected-item-id-target />
+
+                      <div class="row mb-2 text-center">
+                        <div class="col-md-10 themed-grid-head-col">Name</div>
+                        <div class="col-md-2 themed-grid-head-col">
+                            <button class="btn btn-success btn-sm m-1" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#collapseAddArtist">New
+                          </button>                            
+                        </div>
+                      </div>
+                      <div class="collapse row mb-2 text-center" id="collapseAddArtist">                           
+                        <div class="form-floating col-md-5 themed-grid-col">
+                          <input type="text" class="form-control" id="firstName" required/>
+                          <label for="firstName">first name</label>
+                          <div class="invalid-feedback">You must provide a first name.</div>
+                        </div>
+                        <div class="form-floating col-md-5 themed-grid-col">
+                          <input type="text" class="form-control" id="lastName"/>
+                          <label for="lastName">last name</label>
+                        </div>
+                        <div class="col-md-2 themed-grid-col">
+                          <button type="submit" asp-page-handler="AddAlbum" class="btn btn-success btn-sm m-1">
+                            Ok
+                          </button>
+                        </div>                            
+                      </div>
+                      
+                      <div class="row mb-2 text-center">
+                        <div class="col-md-10 themed-grid-col">Angus Young</div>
+                        <div class="col-md-2 themed-grid-col">
+                          <button class="btn btn-secondary btn-sm m-1" type="button" 
+                              data-bs-toggle="collapse" data-bs-target="#collapseEditArtist">Edit
+                          </button>                                  
+                          <button type="submit" class="btn btn-danger btn-sm m-1" data-seido-selected-item-id="123-123">
+                              Del
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="row mb-2 text-center">
+                        <div class="col-md-10 themed-grid-col">Bon Scott</div>
+                        <div class="col-md-2 themed-grid-col">
+                          <button class="btn btn-secondary btn-sm m-1" type="button" 
+                              data-bs-toggle="collapse" data-bs-target="#collapseEditArtist">Edit
+                          </button>                                  
+                          <button type="submit" class="btn btn-danger btn-sm m-1" data-seido-selected-item-id="456-456">
+                              Del
+                          </button>
+                        </div>
+                      </div>
+
+                      <div class="collapse row mb-2 text-center" id="collapseEditArtist">                           
+                        <div class="form-floating col-md-5 themed-grid-col">
+                          <input type="text" class="form-control" id="firstName"/>
+                          <label for="firstName">first name</label>
+                        </div>
+                        <div class="form-floating col-md-5 themed-grid-col">
+                          <input type="text" class="form-control" id="lastName"/>
+                          <label for="lastName">last name</label>
+                        </div>
+                        <div class="col-md-2 themed-grid-col">
+                          <button type="submit" asp-page-handler="EditAlbum" class="btn btn-success btn-sm m-1"
+                            data-seido-selected-item-id="123-123">
+                            Ok
+                          </button>
+                        </div>                            
+                      </div>
+                  </div> 
+
+                  <div class="row g-1">
+                      <!-- This is the parameter to a Post-->
+                      <input type="hidden" name="albumId" data-seido-selected-item-id-target />
+                      <h3 class="pb-2">Albums</h3>
+      
+                      <div class="row mb-2 text-center">
+                          <div class="col-md-8 themed-grid-head-col">Name</div>
+                          <div class="col-md-2 themed-grid-head-col">Year</div>
+                          <div class="col-md-2 themed-grid-head-col">
+                            <button class="btn btn-success btn-sm m-1" type="button" 
+                              data-bs-toggle="collapse" data-bs-target="#collapseAddAlbum">New
+                            </button>
+                          </div>
+                      </div>
+                      <div class="collapse row mb-2 text-center" id="collapseAddAlbum">                           
+                          <div class="col-md-8 themed-grid-col">
+                            <input type="text" class="form-control" value="album name"/>
+                          </div>
+                          <div class="col-md-2 themed-grid-col">
+                            <input type="text" class="form-control" value="1999"/>
+                          </div>
+                          <div class="col-md-2 themed-grid-col">
+                            <button type="submit" asp-page-handler="AddAlbum" class="btn btn-success btn-sm m-1">
+                              Ok
+                            </button>
+                          </div>                            
+                      </div>
+                      <div class="row mb-2 text-center">
+                          <div class="col-md-8 themed-grid-col">High Voltage</div>
+                          <div class="col-md-2 themed-grid-col">1975</div>
+                          <div class="col-md-2 themed-grid-col">
+                              <button class="btn btn-secondary btn-sm m-1" type="button" 
+                                  data-bs-toggle="collapse" data-bs-target="#collapseEditAlbum">Edit
+                              </button>
+
+                              <!-- Button trigger post DeleteAlbum -->
+                              <button type="submit" asp-page-handler="DeleteAlbum" class="btn btn-danger btn-sm m-1"
+                                      data-seido-selected-item-id="123-123">
+                                  Del
+                              </button>
+                          </div>  
+                      </div>
+                      <div class="collapse row mb-2 text-center" id="collapseEditAlbum">
+                          <div class="col-md-8 themed-grid-col">
+                            <input type="text" class="form-control" value=""/>
+                          </div>
+                          <div class="col-md-2 themed-grid-col">
+                            <input type="text" class="form-control" value=""/>
+                          </div>                          
+                          <div class="col-md-2 themed-grid-col">
+                            <button type="submit" asp-page-handler="EditAlbum" class="btn btn-success btn-sm m-1"
+                              data-seido-selected-item-id="123-123">
+                              Ok
+                            </button>
+                          </div>  
+                      </div>
+                  </div>
+                </div>              
+            </div>
+          </form>
+        </div>
+
+        <!-- Page Seed -->
+        <div class="container px-4 py-4" id="seed">
+          <h2 class="pb-2 border-bottom">Seed music groups</h2>
+
+          <p>Current the database contains 100 music groups. Reseed according to the number of items you want.
+            You may optionally remove the old data before seeding.
+          </p>
+
+          <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+              <div class="col-md-7 col-lg-8">
+                  <form class="needs-validation" method="post" novalidate>
+                      <div class="row g-3">
+                          <div class="col-sm-6">
+                              <label for="nrItems" class="form-label">Number of items</label>
+                              <input asp-for="NrOfItems" type="text" class="form-control is-invalid" id="nrItems" placeholder="" value="">
+                              <div class="invalid-feedback">
+                                  Must give number to seed
+                              </div>
+                              <label class="form-check-label" for="removeSeeds"></label>
+                              <input asp-for="RemoveSeeds" class="form-check-input" type="checkbox" id="removeSeeds">
+                              Clear before seeding
+                          </div>
+                      </div>
+                      <button class="w-100 btn btn-primary btn-lg my-4" type="submit">Seed</button>
+                  </form>
+              </div>
+          </div>
+        </div>
+
+        <!-- Page to launch Modals -->
+        <div class="container px-4 py-4" id="modals">
+          <h2 class="pb-2 border-bottom">Modals</h2>
+          <p>Below are modals that can be used by the individual pages. Used for confirmation</p>
+          <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+            <div class="col-md-7 col-lg-8">
+              <form method="post" class="needs-validation" novalidate>
+              
+                <!-- This is where selected item id will be stored -->
+                <input type="hidden" name="groupId" data-seido-selected-item-id-target />
+      
+                <!-- Button trigger modal with explicit post button -->
+                <button type="button" class="w-100 btn btn-primary my-1" data-bs-toggle="modal" data-bs-target="#submitModal"
+                    data-seido-modal-title="submitModal" data-seido-modal-body="submitModal body"
+                    data-seido-selected-item-id="@Guid.NewGuid()">
+                    Launch submitModal
+                </button>
+            
+                <!-- Modal with submit OK button within a form -->
+                <div class="modal fade" id="submitModal" tabindex="-1" aria-labelledby="softModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-danger" id="softModalLabel">Confirm deletion</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Hello from modal
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" asp-page-handler="DeleteGroup" class="btn btn-primary btn-danger">Ok</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+  
+        <!-- Page register -->
+        <div class="container px-4 py-4" id="register">
+          <form class="needs-validation" novalidate>
+          <h2 class="pb-2 border-bottom">Register yourself</h2>
+
+          <p>If you register yourself you can you can edit the data in the database.</p>
+            <div class="row row-cols-1 row-cols-lg-4 align-items-stretch g-4 py-5">
+              <div class="col-md-7 col-lg-8">
+                  <div class="row g-3">
+                    <div class="col-sm-6">
+                      <label for="firstName" class="form-label">Firstname</label>
+                      <input type="text" class="form-control is-invalid" id="firstName" placeholder="" value="" required>
+                      <div class="invalid-feedback">
+                        Firstname is required
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <label for="lastName" class="form-label">Lastname</label>
+                      <input type="text" class="form-control is-invalid" id="lastName" placeholder="" value="" required>
+                      <div class="invalid-feedback">
+                        Lastname is required
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                      <label for="userEmail" class="form-label">Email</label>
+                      <input type="email" class="form-control is-invalid" id="userEmail" placeholder="" value="" required>
+                      <div class="invalid-feedback">
+                        Email is required
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                    
+                    <div class="col-sm-6">
+                      <label for="userPassword" class="form-label">Password</label>
+                      <input type="password" class="form-control is-invalid" id="userPassword" placeholder="" value="" required>
+                      <div class="invalid-feedback">
+                        Password is required
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="confirmPassword" class="form-label">Confirm Password</label>
+                      <input type="password" class="form-control is-invalid" id="confirmPassword" placeholder="" value="" required>
+                      <div class="invalid-feedback">
+                        Passwords do not match
+                      </div>
+                    </div>
+                  </div>
+                <button class="w-100 btn btn-primary btn-lg my-4" type="submit">Register</button>
+            </div>
+          </div>
+        </form>
+        </div>
+
+      <!-- Page sign-in -->
+      <div class="container px-4 py-4" id="sign-in">
+        <div class="form-signin w-100 m-auto">
+          <form>
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        
+            <div class="form-floating">
+              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+              <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+              <label for="floatingPassword">Password</label>
+            </div>
+        
+            <div class="form-check text-start my-3">
+              <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Remember me
+              </label>
+            </div>
+            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+          </form>
+        </div>
+      </div>
+      
+      </main>
+
+      <!-- Part of page Frame -->
+      <!-- Footer with copyright notice and some environment debugging information -->
+    <div class="container">
+      <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+        <div class="col mb-3">
+            <a href="./index.html" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                <span class="mb-3 mb-md-0 text-body-secondary">&copy;&nbsp;2025&nbsp;Seido&nbsp;AB</span>
+            </a>
+        </div>
+        <div class="col mb-3"></div>
+        <div class="col mb-3">
+          <h6>Environment</h6>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">Development</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col mb-3">
+          <h6>Secret</h6>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">AzureKeyVault</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">name of secret</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">UserSecret</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col mb-3">
+          <h6>Data</h6>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">Database</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">connection tag</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">WebApi</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">url to webapi</span>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>      
+      
+      <!-- Part of page Frame -->
+      <!-- Bootstrap Javascript -->
+      <script src="./script/bootstrap/bootstrap.bundle.js"></script>
+
+      <!-- SeidoAB script helpers -->
+      <script src="./script/seido/modals.js"></script>
+      <script src="./script/seido/select-list-items.js"></script>
+      <script src="./script/seido/validate.js"></script>
+    </body>
+</html>

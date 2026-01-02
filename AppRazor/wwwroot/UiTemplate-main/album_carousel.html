@@ -1,0 +1,150 @@
+<!doctype html>
+  <html lang="en" data-bs-theme="auto">
+    <!-- Part of page Frame -->
+    <!-- html-head with all resources -->
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="Martin Lenart, Seido AB">
+  
+      <title>Barbone template</title>
+    
+      <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+      <link rel="manifest" href="./favicon_io/site.webmanifest">
+  
+      <!-- Bootstrap styles from their respective templates -->
+      <link href="./css/bootstrap/bootstrap.css" rel="stylesheet">
+      <link href="./css/bootstrap/navbars-offcanvas.css" rel="stylesheet">
+      <link href="./css/bootstrap/features.css" rel="stylesheet">
+      <link href="./css/bootstrap/grid.css" rel="stylesheet">
+      <link href="./css/bootstrap/sign-in.css" rel="stylesheet">
+      <link href="./css/bootstrap/modals.css" rel="stylesheet">
+    </head>
+
+    <!-- Part of page Frame -->
+    <!-- Header and Menu -->
+    <body>
+
+      <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="./album.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <span class="fs-4">Seido album template</span>
+            </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="./album.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="../album_cards.html" class="nav-link">Cards</a></li>
+                <li class="nav-item"><a href="../album_carousel.html" class="nav-link">Carousel</a></li>
+            </ul>
+        </header>
+      </div>
+
+      <main>
+
+        <!-- Individual pages -->
+        <!-- Page Welcome -->
+        <div class="container px-4 py-4" id="home">
+          <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="./img/jupiter1.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>First slide label</h5>
+                  <p>Some representative placeholder content for the first slide.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="./img/jupiter2.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Second slide label</h5>
+                  <p>Some representative placeholder content for the second slide.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="./img/jupiter3.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>Third slide label</h5>
+                  <p>Some representative placeholder content for the third slide.</p>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+
+      </main>
+
+
+      <!-- Footer with copyright notice and some environment debugging information -->
+      <div class="container">
+      <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+        <div class="col mb-3">
+            <a href="./index.html" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                <span class="mb-3 mb-md-0 text-body-secondary">&copy;&nbsp;2025&nbsp;Seido&nbsp;AB</span>
+            </a>
+        </div>
+        <div class="col mb-3"></div>
+        <div class="col mb-3">
+          <h6>Environment</h6>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">Development</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col mb-3">
+          <h6>Secret</h6>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">AzureKeyVault</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">name of secret</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">UserSecret</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col mb-3">
+          <h6>Data</h6>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">Database</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">connection tag</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">WebApi</span>
+            </li>
+            <li class="nav-item mb-2">
+              <span class="p-0 text-body-secondary small fw-light">url to webapi</span>
+            </li>
+          </ul>
+        </div>
+      </footer>
+      </div>
+      
+      <!-- Part of page Frame -->
+      <!-- Bootstrap Javascript -->
+      <script src="./script/bootstrap/bootstrap.bundle.js"></script>
+
+      <!-- SeidoAB script helpers -->
+      <script src="./script/seido/modals.js"></script>
+      <script src="./script/seido/select-list-items.js"></script>
+    </body>
+</html>
