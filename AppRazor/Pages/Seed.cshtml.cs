@@ -11,18 +11,18 @@ public class SeedModel : PageModel
 {
     private readonly IFriendsService _friendsService;
 
-    // private readonly ILogger<SeedModel> _logger;
+    private readonly ILogger<SeedModel> _logger;
 
-    // public SeedModel(ILogger<SeedModel> logger, IFriendsService friendsService)
-    // {
-    //     _logger = logger;
-    //     _friendsService = friendsService;
-    // }
-
-    public SeedModel(IFriendsService friendsService)
+    public SeedModel(ILogger<SeedModel> logger, IFriendsService friendsService)
     {
+        _logger = logger;
         _friendsService = friendsService;
     }
+
+    // public SeedModel(IFriendsService friendsService)
+    // {
+    //     _friendsService = friendsService;
+    // }
 
     public List<IFriend> Friends { get; private set; } = new();
 
