@@ -3,16 +3,36 @@
 
 <h1>All Friends</h1>
 
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <p>@Model.Message</p>
+}
+
 @if (Model.Friends.Any())
 {
-    <ul>
-    @foreach (var f in Model.Friends)
-    {
-        <li>@f.FirstName @f.LastName (@f.Email)</li>
-    }
-    </ul>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Birthday</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var f in Model.Friends)
+        {
+            <tr>
+                <td>@f.FirstName</td>
+                <td>@f.LastName</td>
+                <td>@f.Email</td>
+                <td>@(f.Birthday?.ToShortDateString() ?? "-")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
 }
 else
 {
-    <p>No friends found.</p>
+    <p>No friends were found.</p>
 }

@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Services; // ditt service-lager namespace
-using Models;
+using Services.Interfaces;
 using Models.Interfaces;
-using Services.Interfaces;   // Friend, Address, Pet osv.
 
 namespace AppRazor.Pages;
 
@@ -11,31 +8,37 @@ public class SeedModel : PageModel
 {
     private readonly IFriendsService _friendsService;
 
-    private readonly ILogger<SeedModel> _logger;
-
-    public SeedModel(ILogger<SeedModel> logger, IFriendsService friendsService)
+    public SeedModel(IFriendsService friendsService)
     {
-        _logger = logger;
         _friendsService = friendsService;
     }
 
-    // public SeedModel(IFriendsService friendsService)
-    // {
-    //     _friendsService = friendsService;
-    // }
+    // Lista med alla friends som hämtas från databasen
+    public List<IFriend> Friends { get; set; } = new List<IFriend>();
 
-    public List<IFriend> Friends { get; private set; } = new();
+    // Meddelande till användaren
+    public string? Message { get; set; }
 
+    // Körs när sidan laddas
     public async Task OnGetAsync()
     {
-        var resp = await _friendsService.ReadFriendsAsync(
-            seeded: true,
-            flat: false,
-            filter: "",
-            pageNumber: 0,
-            pageSize: int.MaxValue
-        );
+        try
+        {
+            // Läs alla friends utan filter (seeded = true/false, flat = true för simplifierad DTO)
+            var response = await _friendsService.ReadFriendsAsync(
+                seeded: true,      // eller false om du vill hämta allt
+                flat: true,        // returnerar “platt” version utan navigation properties
+                filter: "",        // tomt filter = alla
+                pageNumber: 0,
+                pageSize: 1000     // stort nummer för att hämta alla på en gång
+            );
 
-        Friends = resp.PageItems ?? new List<IFriend>();
+            Friends = response.PageItems.ToList();
+            Message = $"Hittade {Friends.Count} friends i databasen.";
+        }
+        catch (Exception ex)
+        {
+            Message = $"Fel vid hämtning av friends: {ex.Message}";
+        }
     }
 }
