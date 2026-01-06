@@ -1,34 +1,29 @@
-// using Services;
-// using Services.Interfaces;
-
-using Microsoft.Extensions.Logging;
 using Services;
 using Services.Interfaces;
 using DbRepos;
-using Configuration.Extensions;
-using DbContext.Extensions;
-using Encryption.Extensions;
+using DbContext;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Logging & Razor Pages
-// Add services to the container.
+// Lägg till Razor Pages
 builder.Services.AddRazorPages();
-builder.Services.AddLogging();
-builder.Configuration.AddSecrets(builder.Environment);
 
-// Encryption + database
-builder.Services.AddEncryptions(builder.Configuration);
-builder.Services.AddDatabaseConnections(builder.Configuration);
-builder.Services.AddUserBasedDbContext();
+// Lägg till DbContext (MainDbContext) med standard-konfiguration
+builder.Services.AddDbContext<MainDbContext>(options =>
+{
+    // Här kan du hämta connection string från user secrets eller appsettings
+    var connString = builder.Configuration.GetConnectionString("DefaultConnection");
+    options.UseSqlServer(connString); // eller UseMySql / UseNpgsql beroende på din DB
+});
 
-// Repos
+// Lägg till Repos
 builder.Services.AddScoped<FriendsDbRepos>();
 builder.Services.AddScoped<AddressesDbRepos>();
 builder.Services.AddScoped<PetsDbRepos>();
 builder.Services.AddScoped<QuotesDbRepos>();
 
-// Services 
+// Lägg till Services
 builder.Services.AddScoped<IFriendsService, FriendsServiceDb>();
 builder.Services.AddScoped<IAddressesService, AddressesServiceDb>();
 builder.Services.AddScoped<IPetsService, PetsServiceDb>();
@@ -36,33 +31,20 @@ builder.Services.AddScoped<IQuotesService, QuotesServiceDb>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middleware
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles(); // standard statiska filer från wwwroot
 
 app.UseRouting();
-
 app.UseAuthorization();
 
-app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+// Map Razor Pages
+app.MapRazorPages();
 
 app.Run();
-
-
-// Razor Page
-//    ↓
-// Service (IFriendsService)
-//    ↓
-// Repo (FriendsDbRepos)
-//    ↓
-// DbContext
-//    ↓
-// Database

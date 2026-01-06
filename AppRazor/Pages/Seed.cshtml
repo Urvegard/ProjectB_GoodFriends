@@ -5,7 +5,7 @@
 
 @if (!string.IsNullOrEmpty(Model.Message))
 {
-    <p>@Model.Message</p>
+    <div class="alert alert-danger">@Model.Message</div>
 }
 
 @if (Model.Friends.Any())
@@ -13,20 +13,18 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Firstname</th>
-                <th>Surname</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Birthday</th>
             </tr>
         </thead>
         <tbody>
-        @foreach (var f in Model.Friends)
+        @foreach (var friend in Model.Friends)
         {
             <tr>
-                <td>@f.FirstName</td>
-                <td>@f.LastName</td>
-                <td>@f.Email</td>
-                <td>@(f.Birthday?.ToShortDateString() ?? "-")</td>
+                <td>@friend.FirstName @friend.LastName</td>
+                <td>@friend.Email</td>
+                <td>@friend.Birthday?.ToShortDateString()</td>
             </tr>
         }
         </tbody>
@@ -34,5 +32,5 @@
 }
 else
 {
-    <p>No friends were found.</p>
+    <p>No friends found.</p>
 }

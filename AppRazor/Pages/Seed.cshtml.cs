@@ -8,37 +8,37 @@ public class SeedModel : PageModel
 {
     private readonly IFriendsService _friendsService;
 
+    // DI via konstruktorn
     public SeedModel(IFriendsService friendsService)
     {
         _friendsService = friendsService;
     }
 
-    // Lista med alla friends som hämtas från databasen
+    // Lista över alla friends som ska visas
     public List<IFriend> Friends { get; set; } = new List<IFriend>();
 
-    // Meddelande till användaren
+    // Meddelande till användaren (valfritt)
     public string? Message { get; set; }
 
-    // Körs när sidan laddas
     public async Task OnGetAsync()
     {
         try
         {
-            // Läs alla friends utan filter (seeded = true/false, flat = true för simplifierad DTO)
-            var response = await _friendsService.ReadFriendsAsync(
-                seeded: true,      // eller false om du vill hämta allt
-                flat: true,        // returnerar “platt” version utan navigation properties
-                filter: "",        // tomt filter = alla
-                pageNumber: 0,
-                pageSize: 1000     // stort nummer för att hämta alla på en gång
+            // Hämta alla friends utan filter (seeded = true, flat = false, filter = "")
+            var result = await _friendsService.ReadFriendsAsync(
+                seeded: true, 
+                flat: false, 
+                filter: "", 
+                pageNumber: 0, 
+                pageSize: 1000 // tillräckligt stor för att hämta alla
             );
 
-            Friends = response.PageItems.ToList();
-            Message = $"Hittade {Friends.Count} friends i databasen.";
+            Friends = result.PageItems;
         }
         catch (Exception ex)
         {
-            Message = $"Fel vid hämtning av friends: {ex.Message}";
+            // Om något går fel
+            Message = $"Ett fel uppstod: {ex.Message}";
         }
     }
 }
