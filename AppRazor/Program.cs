@@ -12,9 +12,11 @@ builder.Services.AddRazorPages();
 // Lägg till DbContext (MainDbContext) med standard-konfiguration
 builder.Services.AddDbContext<MainDbContext>(options =>
 {
-    // Här kan du hämta connection string från user secrets eller appsettings
-    var connString = builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseSqlServer(connString); // eller UseMySql / UseNpgsql beroende på din DB
+    var connStr = builder.Configuration.GetConnectionString("sql-friends.sqlserver.docker.root");
+    if (string.IsNullOrEmpty(connStr))
+        throw new InvalidOperationException("Connection string not found in User Secrets");
+
+    options.UseSqlServer(connStr, sqlOptions => sqlOptions.EnableRetryOnFailure());
 });
 
 // Lägg till Repos

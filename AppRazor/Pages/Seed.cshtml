@@ -1,7 +1,9 @@
 @page
 @model AppRazor.Pages.SeedModel
-
-<h1>All Friends</h1>
+@{
+    ViewData["Title"] = "All Friends";
+}
+<h1>@ViewData["Title"]</h1>
 
 @if (!string.IsNullOrEmpty(Model.Message))
 {
