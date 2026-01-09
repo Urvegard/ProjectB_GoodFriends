@@ -1,5 +1,5 @@
-@page
-@model AppRazor.Pages.Seed
+﻿@page
+@model FriendsByCountry
 @{
     ViewData["Title"] = "All Friends";
 }
@@ -21,13 +21,19 @@
             </tr>
         </thead>
         <tbody>
-        @foreach (var friend in Model.Friends)
+        @foreach(var countryGroup in Model.FriendsByCountries)
         {
+            <h3>@countryGroup.Key 
+                <span class="badge bg-primary">@countryGroup.Count()</span>
+            </h3>
+            @foreach (var friend in countryGroup)
+            {
             <tr>
                 <td>@friend.FirstName @friend.LastName</td>
                 <td>@friend.Email</td>
                 <td>@friend.Birthday?.ToShortDateString()</td>
             </tr>
+            }
         }
         </tbody>
     </table>

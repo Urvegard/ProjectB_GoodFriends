@@ -1,21 +1,23 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services.Interfaces;
 using Models.Interfaces;
+using System.Data.Common;
 
 namespace AppRazor.Pages;
 
-public class Seed : PageModel
+public class FriendsByCountry : PageModel
 {
     private readonly IFriendsService _friendsService;
 
     // DI via konstruktorn
-    public Seed(IFriendsService friendsService)
+    public FriendsByCountry(IFriendsService friendsService)
     {
         _friendsService = friendsService;
     }
 
     // Lista över alla friends som ska visas
     public List<IFriend> Friends { get; set; } = new List<IFriend>();
+    public List<IGrouping<string, IFriend>> FriendsByCountries { get; set; } = new(); 
 
     // Meddelande till användaren (valfritt)
     public string? Message { get; set; }
@@ -30,8 +32,12 @@ public class Seed : PageModel
                 flat: false, 
                 filter: "", 
                 pageNumber: 0, 
-                pageSize: 1000 // tillräckligt stor för att hämta alla
+                pageSize: 100 // tillräckligt stor för att hämta alla
             );
+            
+            FriendsByCountries = result.PageItems.Where(f => f.Address != null)
+            .GroupBy(x => x.Address.Country)
+            .ToList();
 
             Friends = result.PageItems;
         }
