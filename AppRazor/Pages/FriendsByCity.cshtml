@@ -1,0 +1,72 @@
+@page
+@model AppRazor.Pages.FriendsAndPets
+@{
+    ViewData["Title"] = "Friends By Country/City";
+}
+
+<div class="container">
+    <h1>Friends By Country/City</h1>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert alert-danger">@Model.Message</div>
+    }
+
+    @* För att kunna välja specifikt land via en dropdown-meny *@
+    <form method="get" class="mb-4">
+        <label class="form-label">Select Country</label>
+        <select name="SelectedCountry" class="form-select" onchange="this.form.submit()">
+
+            <option value="">-- All countries --</option>
+
+            @foreach (var country in Model.Countries)
+            {
+                <option value="@country" selected="@(country == Model.SelectedCountry)">
+                    @country
+                </option>
+            }
+        </select>
+    </form>
+
+    <!-- Visa land -> stad -> vänner -->
+    @foreach (var countryGroup in Model.Friends.GroupBy(f => f.Address.Country))
+    {
+        <h2 class="mt-5">
+            @countryGroup.Key
+            <span class="badge bg-primary">@countryGroup.Count()</span>
+        </h2>
+
+        @foreach (var cityGroup in countryGroup.GroupBy(f => f.Address.City))
+        {
+            <h4 class="mt-3">
+                @cityGroup.Key
+                <span class="badge bg-secondary">@cityGroup.Count()</span>
+            </h4>
+
+            <table class="table table-striped mb-4">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        @* <th>Pets</th> *@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var friend in cityGroup)
+                    {
+                        <tr>
+                            <td>@friend.FirstName @friend.LastName</td>
+                            <td>@friend.Email</td>
+                            <td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+
+    @if (!Model.Friends.Any())
+    {
+        <p>No friends were found.</p>
+    }
+</div>

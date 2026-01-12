@@ -1,44 +1,41 @@
 ﻿@page
-@model FriendsByCountry
+@model AppRazor.Pages.FriendsByCountry
 @{
-    ViewData["Title"] = "All Friends";
-}
-<h1>@ViewData["Title"]</h1>
-
-@if (!string.IsNullOrEmpty(Model.Message))
-{
-    <div class="alert alert-danger">@Model.Message</div>
+    ViewData["Title"] = "Friends By Country";
 }
 
-@if (Model.Friends.Any())
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Birthday</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach(var countryGroup in Model.FriendsByCountries)
-        {
-            <h3>@countryGroup.Key 
-                <span class="badge bg-primary">@countryGroup.Count()</span>
-            </h3>
-            @foreach (var friend in countryGroup)
-            {
-            <tr>
-                <td>@friend.FirstName @friend.LastName</td>
-                <td>@friend.Email</td>
-                <td>@friend.Birthday?.ToShortDateString()</td>
-            </tr>
-            }
-        }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No friends found.</p>
-}
+<div class="container">
+    <h1>All Friends</h1>
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert alert-danger">@Model.Message</div>
+    }
+    @foreach (var countryGroup in Model.FriendsByCountries)
+    {
+        <h2 class="mt-4">
+            @countryGroup.Key
+            <span class="badge bg-primary">@countryGroup.Count()</span>
+        </h2>
+        <table class="table table-striped mb-5">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var friend in countryGroup)
+                {
+                    <tr>
+                        <td>@friend.FirstName @friend.LastName</td>
+                        <td>@friend.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    @if (!Model.FriendsByCountries.Any())
+    {
+        <p>No Friends Were Found.</p>
+    }
+</div>
