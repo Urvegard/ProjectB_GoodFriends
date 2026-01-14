@@ -1,0 +1,47 @@
+@page "{friendId:guid}"
+@model AppRazor.Pages.EditFriendAddress
+@{
+    ViewData["Title"] = "Edit Address";
+}
+
+<h1>Edit Address for @Model.FriendName</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="FriendId" />
+    <input type="hidden" asp-for="Address.AddressId" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <p>
+        <strong>Street:</strong><br />
+        <input asp-for="Address.StreetAddress" class="form-control" />
+        <span asp-validation-for="Address.StreetAddress" class="text-danger"></span>
+    </p>
+
+    <p>
+        <strong>Zip code:</strong><br />
+        <input asp-for="Address.ZipCode" class="form-control" />
+        <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
+    </p>
+
+    <p>
+        <strong>City:</strong><br />
+        <input asp-for="Address.City" class="form-control" />
+        <span asp-validation-for="Address.City" class="text-danger"></span>
+    </p>
+
+    <p>
+        <strong>Country:</strong><br />
+        <input asp-for="Address.Country" class="form-control" />
+        <span asp-validation-for="Address.Country" class="text-danger"></span>
+    </p>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-page="/FriendsInDetail" asp-route-friendId="@Model.FriendId" class="btn btn-secondary">
+        Cancel
+    </a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,70 @@
+@page
+@model AppRazor.Pages.FriendsInDetail
+@{
+    ViewData["Title"] = "Friend Details";
+}
+
+<div class="container mt-4">
+    <h1>Friend Details</h1>
+
+    @if (Model.Friend == null)
+    {
+        <div class="alert alert-info">
+            No friend selected. Click a friend from the list to view details.
+        </div>
+    }
+    else
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2>@Model.Friend.FirstName @Model.Friend.LastName</h2>
+                <p><strong>Email:</strong> @Model.Friend.Email</p>
+
+                <h4>Address</h4>
+                @if (Model.Friend.Address != null)
+                {
+                    <p>
+                        @Model.Friend.Address.StreetAddress<br />
+                        @Model.Friend.Address.ZipCode @Model.Friend.Address.City<br />
+                        @Model.Friend.Address.Country
+                    </p>
+                }
+                else
+                {
+                    <p>No address available.</p>
+                }
+
+                <h4>Pets</h4>
+                @if (Model.Friend.Pets != null && Model.Friend.Pets.Any())
+                {
+                    <ul>
+                        @foreach (var pet in Model.Friend.Pets)
+                        {
+                            <li>@pet.Name (@pet.Kind)</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No pets.</p>
+                }
+
+                <h4>Quotes</h4>
+                @if (Model.Friend.Quotes != null && Model.Friend.Quotes.Any())
+                {
+                    <ul>
+                        @foreach (var quote in Model.Friend.Quotes)
+                        {
+                            <li>"@quote.QuoteText"</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No quotes.</p>
+                }
+                <a asp-page="/AllFriends" class="btn btn-secondary mt-3">Back to list</a>
+            </div>
+        </div>
+    }
+</div>

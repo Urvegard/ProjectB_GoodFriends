@@ -4,12 +4,12 @@ using Models.Interfaces;
 
 namespace AppRazor.Pages;
 
-public class Seed : PageModel
+public class AllFriends : PageModel
 {
     private readonly IFriendsService _friendsService;
 
     // DI via konstruktorn
-    public Seed(IFriendsService friendsService)
+    public AllFriends(IFriendsService friendsService)
     {
         _friendsService = friendsService;
     }
@@ -30,7 +30,7 @@ public class Seed : PageModel
                 flat: false, 
                 filter: "", 
                 pageNumber: 0, 
-                pageSize: 1000 // tillräckligt stor för att hämta alla
+                pageSize: 100 
             );
 
             Friends = result.PageItems;

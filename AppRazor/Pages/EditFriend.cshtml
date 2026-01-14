@@ -1,0 +1,46 @@
+@page "{friendId:guid}"
+@model AppRazor.Pages.EditFriend
+@{
+    ViewData["Title"] = "Edit Friend";
+}
+
+<h1>Edit Friend</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Friend.FriendId" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <p>
+        <strong>First Name:</strong><br />
+        <input asp-for="Friend.FirstName" class="form-control" />
+        <span asp-validation-for="Friend.FirstName" class="text-danger"></span>
+    </p>
+
+    <p>
+        <strong>Last Name:</strong><br />
+        <input asp-for="Friend.LastName" class="form-control" />
+        <span asp-validation-for="Friend.LastName" class="text-danger"></span>
+    </p>
+
+    <p>
+        <strong>Email:</strong><br />
+        <input asp-for="Friend.Email" class="form-control" />
+        <span asp-validation-for="Friend.Email" class="text-danger"></span>
+    </p>
+
+    <p>
+        <strong>Birthday:</strong><br />
+        <input asp-for="Friend.Birthday" type="date" class="form-control" />
+        <span asp-validation-for="Friend.Birthday" class="text-danger"></span>
+    </p>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-page="/FriendsInDetail" asp-route-friendId="@Model.Friend.FriendId" class="btn btn-secondary">
+        Cancel
+    </a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
