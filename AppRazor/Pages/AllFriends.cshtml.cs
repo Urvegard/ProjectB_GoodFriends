@@ -22,23 +22,28 @@ public class AllFriends : PageModel
 
     public async Task OnGetAsync()
     {
-        try
-        {
-            // Hämta alla friends utan filter (seeded = true, flat = false, filter = "")
-            var result = await _friendsService.ReadFriendsAsync(
-                seeded: true, 
-                flat: false, 
-                filter: "", 
-                pageNumber: 0, 
-                pageSize: 100 
-            );
+        // För att hämta hem vänner från databasen
+        var seededFriends = await _friendsService.ReadFriendsAsync(
+            seeded: true,
+            flat: false,
+            filter: "",
+            pageNumber: 0,
+            pageSize: 100
+        );
 
-            Friends = result.PageItems;
-        }
-        catch (Exception ex)
-        {
-            // Om något går fel
-            Message = $"Ett fel uppstod: {ex.Message}";
-        }
+        // För att visa uppdaterade vänner i databasen
+        var editedFriends = await _friendsService.ReadFriendsAsync(
+            seeded: false,
+            flat: false,
+            filter: "",
+            pageNumber: 0,
+            pageSize: 100
+        );
+
+        Friends = seededFriends.PageItems
+            .Concat(editedFriends.PageItems)
+            .OrderBy(f => f.LastName)
+            .ThenBy(f => f.FirstName)
+            .ToList();
     }
 }

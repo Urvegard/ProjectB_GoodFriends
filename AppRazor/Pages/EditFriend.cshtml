@@ -36,10 +36,54 @@
     </p>
 
     <button type="submit" class="btn btn-success">Save</button>
-    <a asp-page="/FriendsInDetail" asp-route-friendId="@Model.Friend.FriendId" class="btn btn-secondary">
+    <a asp-page="/FriendsInDetail" asp-route-friendId="@Model.Friend?.FriendId" class="btn btn-secondary">
         Cancel
     </a>
 </form>
+
+<hr />
+
+<h3>Pets</h3>
+@if (Model.FriendFull?.Pets != null && Model.FriendFull.Pets.Any())
+{
+    <ul>
+        @foreach (var pet in Model.FriendFull.Pets)
+        {
+            <li>
+                @pet.Name (@pet.Kind)
+                <form method="post" asp-page-handler="DeletePet" class="d-inline">
+                    <input type="hidden" name="petId" value="@pet.PetId" />
+                    <button type="submit" class="btn btn-sm btn-danger">🗑️Remove/Delete🗑️</button>
+                </form>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No pets.</p>
+}
+
+<h3>Quotes</h3>
+@if (Model.FriendFull?.Quotes != null && Model.FriendFull.Quotes.Any())
+{
+    <ul>
+        @foreach (var quote in Model.FriendFull.Quotes)
+        {
+            <li>
+                "@quote.QuoteText" - @quote.Author
+                <form method="post" asp-page-handler="DeleteQuote" class="d-inline">
+                    <input type="hidden" name="quoteId" value="@quote.QuoteId" />
+                    <button type="submit" class="btn btn-sm btn-danger">🗑️Remove/Delete🗑️</button>
+                </form>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No quotes.</p>
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

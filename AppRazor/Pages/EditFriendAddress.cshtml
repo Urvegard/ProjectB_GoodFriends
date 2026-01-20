@@ -13,25 +13,25 @@
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <p>
-        <strong>Street:</strong><br />
+        <label asp-for="Address.StreetAddress"><strong>Street:</strong></label><br />
         <input asp-for="Address.StreetAddress" class="form-control" />
         <span asp-validation-for="Address.StreetAddress" class="text-danger"></span>
     </p>
 
     <p>
-        <strong>Zip code:</strong><br />
+        <label asp-for="Address.ZipCode"><strong>Zip Code:</strong></label><br />
         <input asp-for="Address.ZipCode" class="form-control" />
         <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
     </p>
 
     <p>
-        <strong>City:</strong><br />
+        <label asp-for="Address.City"><strong>City:</strong></label><br />
         <input asp-for="Address.City" class="form-control" />
         <span asp-validation-for="Address.City" class="text-danger"></span>
     </p>
 
     <p>
-        <strong>Country:</strong><br />
+        <label asp-for="Address.Country"><strong>Country:</strong></label><br />
         <input asp-for="Address.Country" class="form-control" />
         <span asp-validation-for="Address.Country" class="text-danger"></span>
     </p>

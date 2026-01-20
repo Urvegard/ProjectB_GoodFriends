@@ -14,7 +14,6 @@ public class FriendsInDetail : PageModel
         _friendsService = friendsService;
     }
 
-    // En vän att visa
     public IFriend? Friend { get; set; }
 
     public async Task<IActionResult> OnGetAsync(Guid friendId)
@@ -24,7 +23,7 @@ public class FriendsInDetail : PageModel
         if (response.Item == null)
             return NotFound();
 
-        Friend = response.Item; 
+        Friend = response.Item;
 
         return Page();
     }

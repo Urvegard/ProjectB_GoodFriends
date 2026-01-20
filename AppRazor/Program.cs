@@ -1,10 +1,19 @@
 using Services;
+using Encryption;
 using Services.Interfaces;
 using DbRepos;
 using DbContext;
 using Microsoft.EntityFrameworkCore;
+using Encryption.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// --- Bind AesEncryptionOptions från user-secrets ---
+builder.Services.Configure<AesEncryptionOptions>(
+    builder.Configuration.GetSection("AesEncryption")); 
+
+// --- Lägg till Encryptions som Scoped (så DI fungerar korrekt) ---
+builder.Services.AddScoped<Encryptions>();
 
 // Lägg till Razor Pages
 builder.Services.AddRazorPages();
@@ -24,12 +33,14 @@ builder.Services.AddScoped<FriendsDbRepos>();
 builder.Services.AddScoped<AddressesDbRepos>();
 builder.Services.AddScoped<PetsDbRepos>();
 builder.Services.AddScoped<QuotesDbRepos>();
+builder.Services.AddScoped<AdminDbRepos>();
 
 // Lägg till Services
 builder.Services.AddScoped<IFriendsService, FriendsServiceDb>();
 builder.Services.AddScoped<IAddressesService, AddressesServiceDb>();
 builder.Services.AddScoped<IPetsService, PetsServiceDb>();
 builder.Services.AddScoped<IQuotesService, QuotesServiceDb>();
+builder.Services.AddScoped<IAdminService, AdminServiceDb>();
 
 var app = builder.Build();
 

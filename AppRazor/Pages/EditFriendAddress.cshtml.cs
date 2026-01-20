@@ -1,95 +1,81 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Models.DTO;
+using Models.Interfaces;
 using Services.Interfaces;
 using System;
 using System.Threading.Tasks;
 
-namespace AppRazor.Pages
+namespace AppRazor.Pages;
+
+public class EditFriendAddress : PageModel
 {
-    public class EditFriendAddress : PageModel
+    private readonly IAddressesService _addressesService;
+    private readonly IFriendsService _friendsService;
+
+    public EditFriendAddress(IAddressesService addressesService, IFriendsService friendsService)
     {
-        private readonly IFriendsService _friendsService;
-        private readonly IAddressesService _addressesService;
+        _addressesService = addressesService;
+        _friendsService = friendsService;
+    }
 
-        public EditFriendAddress(IFriendsService friendsService, IAddressesService addressesService)
+    [BindProperty(SupportsGet = true)]
+    public Guid FriendId { get; set; }
+
+    [BindProperty]
+    public AddressCuDto Address { get; set; } = new AddressCuDto();
+
+    public string FriendName { get; set; } = "";
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        // Hämta vännen för att fylla i eventuell befintlig adress
+        var response = await _friendsService.ReadFriendAsync(FriendId, flat: false);
+        if (response.Item == null)
+            return NotFound();
+
+        FriendName = $"{response.Item.FirstName} {response.Item.LastName}";
+
+        if (response.Item.Address != null)
         {
-            _friendsService = friendsService;
-            _addressesService = addressesService;
+            // Kopiera befintlig adress till DTO för formulärbindning
+            Address = new AddressCuDto(response.Item.Address);
+        }
+        else
+        {
+            // Ny adress, se till att FriendsId är satt
+            Address.FriendsId = new List<Guid> { FriendId };
         }
 
-        // FriendId skickas via route
-        [BindProperty(SupportsGet = true)]
-        public Guid FriendId { get; set; }
+        return Page();
+    }
 
-        // FriendName används i rubrik
-        public string FriendName { get; set; } = "";
-
-        // Adress som ska bindas till formulär
-        [BindProperty]
-        public AddressCuDto Address { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync()
-        {
-            // Hämta vän
-            var friendResponse = await _friendsService.ReadFriendAsync(FriendId, flat: false);
-            if (friendResponse.Item == null)
-                return NotFound();
-
-            // Spara vänens namn för rubrik
-            FriendName = $"{friendResponse.Item.FirstName} {friendResponse.Item.LastName}";
-
-            // Om adress saknas → skapa tom AddressCuDto (AddressId null)
-            if (friendResponse.Item.Address == null)
-            {
-                Address = new AddressCuDto
-                {
-                    AddressId = null,
-                    StreetAddress = "",
-                    ZipCode = 0,
-                    City = "",
-                    Country = "",
-                    FriendsId = new List<Guid> { FriendId } // koppla adress till vän
-                };
-            }
-            else
-            {
-                var f = friendResponse.Item.Address;
-                Address = new AddressCuDto
-                {
-                    AddressId = f.AddressId,
-                    StreetAddress = f.StreetAddress,
-                    ZipCode = f.ZipCode,
-                    City = f.City,
-                    Country = f.Country,
-                    FriendsId = new List<Guid> { FriendId } // koppla adress till vän
-                };
-            }
-
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
             return Page();
-        }
 
-        public async Task<IActionResult> OnPostAsync()
+        // Koppla alltid adress till vännen
+        if (Address.FriendsId == null)
+            Address.FriendsId = new List<Guid> { FriendId };
+        else if (!Address.FriendsId.Contains(FriendId))
+            Address.FriendsId.Add(FriendId);
+
+        // Skapa ny adress eller uppdatera befintlig
+        if (Address.AddressId == null || Address.AddressId == Guid.Empty)
         {
-            if (!ModelState.IsValid)
-                return Page();
-
-            // Skapa ny adress om AddressId saknas
-            if (Address.AddressId == null || Address.AddressId == Guid.Empty)
-            {
-                await _addressesService.CreateAddressAsync(Address);
-            }
-            else
-            {
-                // Annars uppdatera befintlig adress
-                await _addressesService.UpdateAddressAsync(Address);
-            }
-
-            // Redirect tillbaka till friend-details
-            return RedirectToPage(
-                "/FriendsInDetail",
-                new { friendId = FriendId }
-            );
+            await _addressesService.CreateAddressAsync(Address);
         }
+        else
+        {
+            await _addressesService.UpdateAddressAsync(Address);
+        }
+
+        // Redirect till FriendsInDetail med flat:false för att visa uppdaterad info
+        return RedirectToPage(
+            "/FriendsInDetail",
+            new { friendId = FriendId }
+        );
     }
 }
+

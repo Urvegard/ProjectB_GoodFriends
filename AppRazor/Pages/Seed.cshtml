@@ -1,0 +1,18 @@
+@page
+@model AppRazor.Pages.Seed
+@{
+    ViewData["Title"] = "Seed Database";
+}
+
+<h1>Seed Database</h1>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+<form method="post">
+    <button type="submit" class="btn btn-primary">Reseed 100 Friends</button>
+</form>
