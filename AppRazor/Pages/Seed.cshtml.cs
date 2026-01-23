@@ -25,7 +25,7 @@ public class Seed : PageModel
     {
         try
         {
-            await _adminService.RemoveSeedAsync(true);
+            await _adminService.RemoveSeedAsync(seeded: true);
             await _adminService.SeedAsync(100);
 
             Message = "Database reseeded with 100 friends!";
