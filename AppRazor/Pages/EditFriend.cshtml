@@ -84,7 +84,11 @@ else
 {
     <p>No quotes.</p>
 }
-
+@if (TempData["Deleted"] != null)
+    {
+        <script>alert("Item deleted");
+        </script>
+    }
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

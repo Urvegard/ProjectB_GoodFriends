@@ -16,16 +16,16 @@ public class Seed : PageModel
     [TempData]
     public string? Message { get; set; }
 
-    public void OnGet()
-    {
-        // Ingen logik på GET
-    }
-
+    public void OnGet(){}
+    
     public async Task<IActionResult> OnPostSeedAsync()
     {
         try
         {
+            // Rensar befintlig data i databasen först
             await _adminService.RemoveSeedAsync(seeded: true);
+
+            // Seedar om databasen med 100 nya vänner
             await _adminService.SeedAsync(100);
 
             Message = "Database reseeded with 100 friends!";

@@ -6,6 +6,8 @@ using DbContext;
 using Microsoft.EntityFrameworkCore;
 using Encryption.Options;
 
+// RIKARD URVEGARD LUNDBERG
+
 var builder = WebApplication.CreateBuilder(args);
 
 // --- Bind AesEncryptionOptions från user-secrets ---

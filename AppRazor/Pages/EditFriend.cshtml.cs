@@ -46,6 +46,7 @@ public class EditFriend : PageModel
         {
             // Uppdatera vän
             await _friendsService.UpdateFriendAsync(Friend);
+            @TempData["Deleted"] = true;
 
             // Redirect tillbaka till detaljsidan för att se uppdateringen direkt
             return RedirectToPage("/FriendsInDetail", new { friendId = Friend?.FriendId });
@@ -63,6 +64,7 @@ public class EditFriend : PageModel
         if (petId != Guid.Empty)
         {
             await _petsService.DeletePetAsync(petId);
+            @TempData["Deleted"] = true;
         }
 
         // Ladda om samma vän efter delete
@@ -76,6 +78,7 @@ public class EditFriend : PageModel
             return BadRequest();
 
         await _quotesService.DeleteQuoteAsync(quoteId);
+        @TempData["Deleted"] = true;
 
         // Ladda om sidan med uppdaterad data
         return RedirectToPage("/EditFriend", new { friendId = Friend?.FriendId });

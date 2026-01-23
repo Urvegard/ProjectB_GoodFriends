@@ -19,7 +19,7 @@ public class FriendsByCountry : PageModel
     public List<IFriend> Friends { get; set; } = new List<IFriend>();
     public List<IGrouping<string, IFriend>> FriendsByCountries { get; set; } = new(); 
 
-    // Meddelande till användaren (valfritt)
+    // Meddelande till användare
     public string? Message { get; set; }
 
     public async Task OnGetAsync()
@@ -32,7 +32,7 @@ public class FriendsByCountry : PageModel
                 flat: false, 
                 filter: "", 
                 pageNumber: 0, 
-                pageSize: 100 // tillräckligt stor för att hämta alla
+                pageSize: 100 
             );
             
             FriendsByCountries = result.PageItems.Where(f => f.Address != null)
@@ -43,7 +43,6 @@ public class FriendsByCountry : PageModel
         }
         catch (Exception ex)
         {
-            // Om något går fel
             Message = $"Ett fel uppstod: {ex.Message}";
         }
     }

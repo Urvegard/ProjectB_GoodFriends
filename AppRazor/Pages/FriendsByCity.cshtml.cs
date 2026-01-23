@@ -18,11 +18,11 @@ public class FriendsByCity : PageModel
     public List<IFriend> Friends { get; set; } = new();
     public List<string> Countries { get; set; } = new();
 
-    // Vald country från dropdown (querystring)
+    // Vald 'Country' från dropdown 
     [BindProperty(SupportsGet = true)]
     public string? SelectedCountry { get; set; }
 
-    // Meddelande till användaren
+    // Meddelande till användare
     public string? Message { get; set; }
 
     public async Task OnGetAsync()
@@ -44,14 +44,14 @@ public class FriendsByCity : PageModel
                     f.Address.City != null)
                 .ToList();
 
-            // 🔹 Alla länder till dropdown (OFILTRERAT)
+            // Alla länder till dropdown 
             Countries = allFriends
                 .Select(f => f.Address.Country!)
                 .Distinct()
                 .OrderBy(c => c)
                 .ToList();
 
-            // 🔹 Filtrera på valt land
+            // Filtrera på valt land
             if (!string.IsNullOrEmpty(SelectedCountry))
             {
                 Friends = allFriends
